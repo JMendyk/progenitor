@@ -476,13 +476,6 @@ impl<E> RequestBuilderExt<E> for RequestBuilder {
                 Part::stream(Vec::from(value.as_ref())),
             );
         }
-        Ok(self
-            .header(
-                reqwest::header::CONTENT_TYPE,
-                reqwest::header::HeaderValue::from_static(
-                    "multipart/form-data",
-                ),
-            )
-            .multipart(form))
+        Ok(self.multipart(form))
     }
 }
