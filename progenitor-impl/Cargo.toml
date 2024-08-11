@@ -22,7 +22,7 @@ syn = { version = "2.0", features = ["parsing"] }
 thiserror = "1.0"
 # change when publishing
 #typify = { version = "0.0.16" }
-typify = { git = "https://github.com/oxidecomputer/typify" }
+typify = { git = "https://github.com/JMendyk/typify" }
 unicode-ident = "1.0.12"
 
 [dev-dependencies]
