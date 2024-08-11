@@ -321,19 +321,17 @@ impl Generator {
                     let TypeDetails::Struct(tstru) = td else { unreachable!() };
                     let properties = indexmap::IndexMap::<&'_ str, _>::from_iter(
                         tstru
-                            .properties()
-                            .filter_map(|(prop_name, prop_id)| {
-                                self.get_type_space()
-                                    .get_type(&prop_id).ok()
-                                    .map(|prop_typ| (prop_name, prop_typ))
+                            .properties_info()
+                            .map(|tspi| {
+                                (tspi.name, tspi.original_name)
                             })
                         );
                     let properties = syn::punctuated::Punctuated::<_, syn::Token![,]>::from_iter(
                         properties
                             .into_iter()
-                            .map(|(prop_name, _prop_ty)| {
+                            .map(|(prop_name, original_name)| {
                                 let ident = quote::format_ident!("{}", prop_name);
-                                quote!{ (#prop_name, &self. #ident) }
+                                quote!{ (#original_name, &self. #ident) }
                             }));
 
                     let form_name = quote::format_ident!("{}",typ.name());

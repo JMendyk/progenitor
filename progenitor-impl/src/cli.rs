@@ -573,6 +573,7 @@ impl Generator {
     ) {
         let TypeStructPropInfo {
             name,
+            original_name: _original_name,
             description,
             required,
             type_id,
